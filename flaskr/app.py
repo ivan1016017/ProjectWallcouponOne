@@ -2,7 +2,7 @@ from flaskr import create_app
 from .models import db, Vendor, Coupon, VendorCategory
 from .models import VendorSchema, CouponSchema, VendorCategorySchema
 from flask_restful import Api 
-from .views import ViewCoupon, ViewVendor, ViewVendorCategory
+from .views import ViewCoupon, ViewVendor, ViewVendorCategory, ViewVendors, ViewCoupons
 
 app = create_app('default')
 app_context = app.app_context()
@@ -10,6 +10,13 @@ app_context.push()
 
 db.init_app(app)
 db.create_all()
+
+api = Api(app)
+api.add_resource(ViewVendors, '/vendors')
+api.add_resource(ViewVendor, '/vendor/<int:id_vendor>')
+api.add_resource(ViewCoupons, '/vendor/coupons')
+api.add_resource(ViewCoupon, '/vendor/coupon/<int:id_coupon>')
+api.add_resource(ViewVendorCategory, '/vendor/categories')
 
 # test
 
