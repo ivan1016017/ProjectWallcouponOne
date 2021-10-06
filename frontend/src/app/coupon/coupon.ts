@@ -1,3 +1,5 @@
+import { Category } from "../category/category";
+
 export class Coupon {
   id: number;
   total_price: number;
@@ -7,7 +9,8 @@ export class Coupon {
   created_at: Date;
   starts_at: Date;
   finishes_at: Date;
-  vendor_id: number
+  vendor_id: number;
+  categories: Array<Category>
 
 
   constructor(
@@ -19,7 +22,9 @@ export class Coupon {
     created_at: Date,
     starts_at: Date,
     finishes_at: Date,
-    vendor_id: number
+    vendor_id: number,
+    categories: Array<Category>
+
   ){
     this.id = id
     this.total_price = total_price
@@ -30,6 +35,8 @@ export class Coupon {
     this.starts_at = starts_at
     this.finishes_at = finishes_at
     this.vendor_id = vendor_id
+    this.categories = categories
+
   }
 
 }

@@ -1,9 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import backref
 from sqlalchemy.sql import func 
 import enum
 from marshmallow import fields
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
-from sqlalchemy.sql.schema import PrimaryKeyConstraint
+from sqlalchemy.sql.schema import ForeignKey, PrimaryKeyConstraint
 from .enumerations import *
 
 db = SQLAlchemy()
@@ -21,6 +22,7 @@ class Vendor(db.Model):
     rating = db.Column(db.Integer)
     location_id = db.Column(db.Integer)
     coupons = db.relationship('Coupon', cascade='all, delete, delete-orphan')
+    categories = db.relationship('Category', cascade='all, delete, delete-orphan')
 
     def __repr__(self):
         return "{} - {}".format(self.company_name, self.address)
@@ -35,6 +37,9 @@ class Coupon(db.Model):
     starts_at = db.Column(db.DateTime(timezone=True), default=func.now())
     finishes_at = db.Column(db.DateTime(timezone=True), default=func.now())
     vendor_id = db.Column(db.Integer, db.ForeignKey('vendor.id'))
+    categories = db.relationship('Category', cascade='all, delete, delete-orphan')
+
+    
 
 
 
@@ -47,6 +52,9 @@ class Category(db.Model):
     third_class_category_locals = db.Column(db.Enum(ThirdClassCategoryLocals))
     third_class_category_goods = db.Column(db.Enum(ThirdClassCategoryGoods))
     third_class_category_hotels = db.Column(db.Enum(ThirdClassCategoryHotels))
+    vendor_id = db.Column(db.Integer, db.ForeignKey('vendor.id'))
+    coupon_id = db.Column(db.Integer, db.ForeignKey('coupon.id'))
+
 
     
 

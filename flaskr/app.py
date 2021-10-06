@@ -45,7 +45,22 @@ with app.app_context():
                         percentage_discount = 0.10,
                         vendor_category_id = 2,
                         vendor_plan_id = 3)
+
+    category_one = Category()
+    category_two = Category()
+    category_three = Category()
+    category_four = Category()
+    
+    vendor_one.categories.append(category_one)
+    vendor_one.categories.append(category_two)
+    coupon_one.categories.append(category_three)
+    coupon_one.categories.append(category_four)
+
+
+
     vendor_two.coupons.append(coupon_one)
+    # db.session.add(category)
+    # db.session(coupon_one)
     db.session.add(vendor_one)
     db.session.add(vendor_two)
     db.session.commit()
@@ -54,7 +69,7 @@ with app.app_context():
     print(Vendor.query.all()[1].coupons)
     print(Vendor.query.all())
     print(Coupon.query.all())
-    db.session.delete(vendor_two)
+    # db.session.delete(vendor_two)
     db.session.commit()
     print(Vendor.query.all())
     print(Coupon.query.all())
