@@ -1,8 +1,8 @@
 from flaskr import create_app
-from .models import db, Vendor, Coupon, VendorCategory
-from .models import VendorSchema, CouponSchema, VendorCategorySchema
+from .models import db, Vendor, Coupon, Category
+from .models import VendorSchema, CouponSchema, CategorySchema
 from flask_restful import Api 
-from .views import ViewCoupon, ViewVendor, ViewVendorCategory, ViewVendors, ViewCoupons
+from .views import ViewCoupon, ViewVendor, ViewCategory, ViewVendors, ViewCoupons
 
 app = create_app('default')
 app_context = app.app_context()
@@ -16,12 +16,14 @@ api.add_resource(ViewVendors, '/vendors')
 api.add_resource(ViewVendor, '/vendor/<int:id_vendor>')
 api.add_resource(ViewCoupons, '/vendor/coupons')
 api.add_resource(ViewCoupon, '/vendor/coupon/<int:id_coupon>')
-api.add_resource(ViewVendorCategory, '/vendor/categories')
+api.add_resource(ViewCategory, '/vendor/categories')
 
 # test
 
 with app.app_context():
     vendor_schema = VendorSchema()
+    coupon_schema = CouponSchema()
+    category_schema = CategorySchema()
     vendor_one = Vendor(company_name = "vendorOne",
                     phone = "123456789",
                     image = "",

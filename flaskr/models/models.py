@@ -38,7 +38,7 @@ class Coupon(db.Model):
 
 
 
-class VendorCategory(db.Model):
+class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_class_category = db.Column(db.Enum(FirstClassCategory))
     second_class_category_locals = db.Column(db.Enum(SecondClassCategoryLocals))
@@ -68,7 +68,7 @@ class CouponSchema(SQLAlchemyAutoSchema):
         include_relationships = True 
         load_instance = True 
 
-class VendorCategorySchema(SQLAlchemyAutoSchema):
+class CategorySchema(SQLAlchemyAutoSchema):
     first_class_category = EnumDictionary(attribute=("first_class_category"))
     second_class_category_locals = EnumDictionary(attribute=("second_class_category_locals"))
     second_class_category_goods = EnumDictionary(attribute=("second_class_category_goods"))
@@ -78,7 +78,7 @@ class VendorCategorySchema(SQLAlchemyAutoSchema):
     third_class_category_hotels = EnumDictionary(attribute=("third_class_category_hotels"))
 
     class Meta: 
-        model = VendorCategory
+        model = Category
         include_relationships = True 
         load_instance = True 
 

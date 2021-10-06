@@ -1,10 +1,10 @@
 from flask_restful import Resource 
-from ..models  import db, Vendor, Coupon, VendorCategory, VendorSchema, CouponSchema, VendorCategorySchema
+from ..models  import db, Vendor, Coupon, Category, VendorSchema, CouponSchema, CategorySchema
 from flask import request
 
 vendor_schema = VendorSchema()
 coupon_schema = CouponSchema()
-vendor_category_schema = VendorCategorySchema()
+category_schema = CategorySchema()
 
 class ViewVendors(Resource):
     def get(self):
@@ -79,6 +79,6 @@ class ViewCoupon(Resource):
 
 
 
-class ViewVendorCategory(Resource):
+class ViewCategory(Resource):
     def get(self):
-        return [vendor_category_schema.dump(vendor_category) for vendor_category in VendorCategory.query.all()]
+        return [category_schema.dump(vendor_category) for vendor_category in Category.query.all()]
