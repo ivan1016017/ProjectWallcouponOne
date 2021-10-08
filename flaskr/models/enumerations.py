@@ -7,26 +7,26 @@ class FirstClassCategory(enum.Enum):
     HOTELS = 3
 
 class SecondClassCategoryLocals(enum.Enum):
-    BEAUTYANDSPAS = 1
-    THINGSTODO = 2
-    FOODANDDRINK = 3
-    HEALTHANDFITNESS = 4
-    MORE = 4
+    BeautyAndSpas = 1
+    ThingsToDo = 2
+    FoodAndDrink = 3
+    HealthAndFitness = 4
+    More = 5
     
 
 class SecondClassCategoryGoods(enum.Enum):
-    HEALTHANDBEAUTY = 1
-    FORTHEHOME = 2
-    WOMENFASHION = 3 
-    MENFASION = 4
-    MORE = 5
+    HealthAndBeauty = 1
+    ForTheHome = 2
+    WomenFashion = 3 
+    MenFashion = 4
+    More = 5
 
 
 class SecondClassCategoryHotels(enum.Enum):
-    HOTEL = 1
-    DEALS = 2
+    Hotels = 1
+    Deals = 2
 
-class ThirdClassCategoryLocals(enum.Enum):
+class ThirdClassCategoryLocalsBeautyAndSpas(enum.Enum):
     FaceSkinCare = 1
     Massage = 2
     Salons = 3
@@ -37,30 +37,41 @@ class ThirdClassCategoryLocals(enum.Enum):
     HairStyling = 8
     NailSalons = 9
     Makeup =  10
-    Tanning = 11
-    BlowoutsAndStyling = 12
-    KidsActivities = 13
-    FunAndLeisure = 14
-    TicketsEvents = 15
-    SightseeingTours = 16
-    SportsOutdoors = 17
-    Nightlife = 18
-    Restaurants = 19
-    BreweriesWineriesDistilleries = 20
-    CafesTreats = 21
-    GroceriesAndMarkets = 22
-    Bars = 23
-    Gyms = 24
-    WeightLoss = 25
-    FitnessClasses = 26
-    Medical = 27
-    Sports = 28
-    NaturalMedicine = 29
-    Dental = 30
-    Vision = 31
+class ThirdClassCategoryLocalsThingsToDo(enum.Enum):
+    Tanning = 1
+    BlowoutsAndStyling = 2
+    KidsActivities = 3
+    FunAndLeisure = 4
+    TicketsEvents = 5
+    SightseeingTours = 6
+    SportsOutdoors = 7
+    Nightlife = 8
+class ThirdClassCategoryLocalsFoodAndDrink(enum.Enum):
+    Restaurants = 1
+    BreweriesWineriesDistilleries = 2
+    CafesTreats = 3
+    GroceriesAndMarkets = 4
+    Bars = 5
+class ThirdClassCategoryLocalsHealthAndFitness(enum.Enum):
+    Gyms = 1
+    WeightLoss = 2
+    FitnessClasses = 3
+    Medical = 4
+    Sports = 5
+    NaturalMedicine = 6
+    Dental = 7
+    Vision = 8
+class ThirdClassCategoryLocalsMore(enum.Enum):
+    Automotive: 1
+    HomeServices: 2
+    MealPrepAndWineDelivery: 3
+    OnlineLearning: 4
+    PersonalServices:5
+    PersolizedItems:6
+    Retail:7
 
 
-class ThirdClassCategoryGoods(enum.Enum):
+class ThirdClassCategoryGoodsHealthAndBeauty(enum.Enum):
     Aromatherapy = 1
     BathAndBody = 2
     Cosmetics = 3
@@ -75,38 +86,54 @@ class ThirdClassCategoryGoods(enum.Enum):
     ShavingAndGrooming = 12
     SkinCare = 13
     VitaminsAndSupplements = 14
-    Art = 15
-    Bath = 16
-    Bedding = 17
-    FloorCareAndCleaning = 18
-    Furniture = 19
-    HeatingCoolingAndAirQuality = 20
-    HomeAppliances = 21
-    HomeDecor = 22
-    KitchenAndDining = 23
-    Luggage = 24
-    MattressesAndAccessories = 25
-    OfficeAndSchoolSupplies = 26
-    OutdoorDecor = 27
-    PatioAndGarden = 28
-    SeasonalDecor = 29
-    StorageAndOrganization = 30
-    Intimates = 31
-    MaternityClothing = 32
-    PlusSizeClothing = 33
-    WomenAccessories = 34
-    WomenClothing = 35
-    WomenShoes = 36
-    MenAccessories = 37
-    MenClothing = 38
-    MenShoes = 39
+class ThirdClassCategoryGoodsForTheHome(enum.Enum):
+    Art = 1
+    Bath = 2
+    Bedding = 3
+    FloorCareAndCleaning = 4
+    Furniture = 5
+    HeatingCoolingAndAirQuality = 6
+    HomeAppliances = 7
+    HomeDecor = 8
+    KitchenAndDining = 9
+    Luggage = 10
+    MattressesAndAccessories = 11
+    OfficeAndSchoolSupplies = 12
+    OutdoorDecor = 13
+    PatioAndGarden = 14
+    SeasonalDecor = 15
+    StorageAndOrganization = 16
+class ThirdClassCategoryGoodsWomenFashion(enum.Enum):
+    Intimates = 1
+    MaternityClothing = 2
+    PlusSizeClothing = 3
+    WomenAccessories = 4
+    WomenClothing = 5
+    WomenShoes = 6
+class ThirdClassCategoryGoodsMenFashion(enum.Enum):
+    MenAccessories = 1
+    MenClothing = 2
+    MenShoes = 3
+class ThirdClassCategoryGoodsMore(enum.Enum):
+    AutoAndHomeImprovement = 1
+    BadyAndKids = 2
+    Electronics = 3
+    Entertainment = 4
+    GroceryAndHousehold = 5
+    JewelryAndWatches = 6
+    PersonalizedItems = 7
+    PetSupplies = 8
+    SportsAndOutdoors = 9
+    Toys = 10
 
-class ThirdClassCategoryHotels(enum.Enum):
+
+class ThirdClassCategoryHotelsAllHotels(enum.Enum):
     AirInclusiveTrips = 1 
     Beach = 2
     Premium = 3
     FamilyFun = 4
     InternationalAndTours = 5
-    NewDeals = 6
-    OutdoorAndAdventure = 7
-    RomanticGetaways = 8
+class ThirdClassCategoryHotelsUnder99(enum.Enum):
+    NewDeals = 1
+    OutdoorAndAdventure = 2
+    RomanticGetaways = 3
