@@ -18,7 +18,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     VendorModule,
-    CouponModule
+    CouponModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

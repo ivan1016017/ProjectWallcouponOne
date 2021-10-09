@@ -2,7 +2,10 @@ from flaskr import create_app
 from .models import db, Vendor, Coupon, Category
 from .models import VendorSchema, CouponSchema, CategorySchema
 from flask_restful import Api 
-from .views import ViewCoupon, ViewVendor, ViewCategory, ViewVendors, ViewCoupons
+from .views import ViewCoupon, ViewVendor, ViewCategory, ViewVendors, ViewCoupons, ViewLogInVendor
+from flask_cors import CORS, cross_origin
+from flask_jwt_extended import JWTManager
+
 
 app = create_app('default')
 app_context = app.app_context()
@@ -10,13 +13,17 @@ app_context.push()
 
 db.init_app(app)
 db.create_all()
+cors = CORS(app)
 
 api = Api(app)
 api.add_resource(ViewVendors, '/vendors')
 api.add_resource(ViewVendor, '/vendor/<int:id_vendor>')
-api.add_resource(ViewCoupons, '/vendor/coupons')
-api.add_resource(ViewCoupon, '/vendor/coupon/<int:id_coupon>')
+api.add_resource(ViewCoupons, '/vendor//coupons')
+api.add_resource(ViewCoupon, '/vendor/<int:id_vendor>/coupons')
 api.add_resource(ViewCategory, '/vendor/categories')
+api.add_resource(ViewLogInVendor, '/vendor/logIn')
+
+jwt = JWTManager(app)
 
 # test
 
@@ -25,6 +32,7 @@ with app.app_context():
     coupon_schema = CouponSchema()
     category_schema = CategorySchema()
     vendor_one = Vendor(company_name = "vendorOne",
+                    password = "1234",
                     phone = "123456789",
                     image = "",
                     address = "Seventh avenue NYC",
@@ -33,6 +41,7 @@ with app.app_context():
                     rating = 10,
                     location_id = 1)
     vendor_two = Vendor(company_name = "vendorTwo",
+                    password = "1234",
                     phone = "12345",
                     image = "",
                     address = "Fifth avenue NYC",
@@ -51,11 +60,7 @@ with app.app_context():
     category_three = Category()
     category_four = Category()
     
-    vendor_one.categories.append(category_one)
-    vendor_one.categories.append(category_two)
-    coupon_one.categories.append(category_three)
-    coupon_one.categories.append(category_four)
-
+    vendor_one.categories
 
 
     vendor_two.coupons.append(coupon_one)

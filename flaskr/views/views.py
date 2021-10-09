@@ -1,6 +1,7 @@
 from flask_restful import Resource 
 from ..models  import db, Vendor, Coupon, Category, VendorSchema, CouponSchema, CategorySchema
 from flask import request
+from flask_jwt_extended import jwt_required, create_access_token
 
 vendor_schema = VendorSchema()
 coupon_schema = CouponSchema()
@@ -22,6 +23,7 @@ class ViewVendors(Resource):
         return vendor_schema.dump(new_vendor)
 
 class ViewVendor(Resource):
+    @jwt_required()
     def get(self, id_vendor):
         return vendor_schema.dump(Vendor.query.get_or_404(id_vendor))
 
@@ -42,19 +44,43 @@ class ViewVendor(Resource):
         db.session.commit()
         return "", 204
 
-
-class ViewCoupons(Resource):
-    def get(self):
-        return [coupon_schema.dump(coupon) for coupon in  Coupon.query.all()]
+class ViewLogInVendor(Resource):
 
     def post(self):
+        vendor = Vendor.query.filter(Vendor.company_name == request.json["company_name"], Vendor.password == request.json["password"]).first()
+        db.session.commit()
+        if vendor is None:
+            return "El vendedor no existe", 404
+        else:
+            access_token = create_access_token(identity = vendor.id)
+            return {"mensaje":"Inicio de sesión exitoso", "token": access_token}
+
+
+class ViewCoupons(Resource):
+    def get(self, id_vendor):
+        vendor = Vendor.query.get_or_404(id_vendor)
+        return [coupon_schema.dump(coupon) for coupon in  vendor.coupons]
+
+    def post(self, id_vendor):
         new_coupon = Coupon(total_price = request.json['total_price'],
         percentage_discount = request.json['percentage_discount'],
         starts_at = request.json['starts_at'],
         finishes_at = request.json['finishes_at'])
+
+        vendor = Vendor.query.get_or_404(id_vendor)
+        vendor.coupons.append(new_coupon)
         db.session.add(new_coupon)
         db.session.commit()
         return coupon_schema.dump(new_coupon)
+
+    def put(self, id_coupon):
+        coupon = Coupon.query.get_or_404(id_coupon)
+        coupon.total_price = request.json.get("total_price", coupon.total_price)
+        coupon.percentage_discount = request.json.get("percentage_discount", coupon.percentage_discount)
+        coupon.starts_at = request.json.get("starts_at", coupon.starts_at)
+        coupon.finishes_at = request.json.get("finishes_at", coupon.finishes_at)
+        db.session.commit()
+        return coupon_schema.dump(coupon)
 
 
 class ViewCoupon(Resource):

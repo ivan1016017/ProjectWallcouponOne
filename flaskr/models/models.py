@@ -13,6 +13,7 @@ db = SQLAlchemy()
 class Vendor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     company_name = db.Column(db.String(50))
+    password = db.Column(db.String(50))
     phone = db.Column(db.String(50))
     image = db.Column(db.String(200))
     address = db.Column(db.String(100))
