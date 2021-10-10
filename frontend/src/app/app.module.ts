@@ -19,7 +19,12 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     VendorModule,
     CouponModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 7000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

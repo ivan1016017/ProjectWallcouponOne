@@ -14,7 +14,7 @@
           <h1 class="text-center">Registro</h1>
         </div>
 
-        <form  (ngSubmit)="signVendor()">
+        <form  [formGroup] = "vendorForm" (ngSubmit)="signVendor()">
 
           <div class="form-group">
             <div class="mb-3 row">
