@@ -47,6 +47,6 @@ export class VendorSigninComponent implements OnInit {
   showSuccess() {
     this.toastr.success(`Se ha registrado exitosamente`, "Registro exitoso");
   }
-
+// This is a new comment added
 
 }
