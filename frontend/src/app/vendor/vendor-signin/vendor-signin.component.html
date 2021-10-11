@@ -18,7 +18,7 @@
 
           <div class="form-group">
             <div class="mb-3 row">
-              <label for="companyName" class="col-lg-3 col-form-label">Usuario</label>
+              <label for="companyName" class="col-lg-3 col-form-label">Vendedor</label>
               <div class="col-lg-9  ">
                 <input formControlName="companyName" type="text" class="form-control" placeholder="ejemplo@ejemplo.com">
               </div>
@@ -71,8 +71,141 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <div class="mb-3 row">
+              <label for="phone" class="col-lg-3 col-form-label">Telefono</label>
+              <div class="col-lg-9  ">
+                <input formControlName="phone" type="text" class="form-control" placeholder="55 52758439">
+              </div>
+            </div>
+            <div class="alert alert-danger my-3" *ngIf="vendorForm.get('phone')?.hasError('required') && vendorForm.get('phone')?.touched">
+              Debe ingresar un telefono para registrarse
+            </div>
+            <div class="alert alert-danger my-3" *ngIf="vendorForm.get('phone')?.hasError('maxlength')">
+              El telefono no debe exceder los 12 digitos
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <div class="mb-3 row">
+              <label for="image" class="col-lg-3 col-form-label">Imagen</label>
+              <div class="col-lg-9  ">
+                <input formControlName="image" type="text" class="form-control" placeholder="imagen">
+              </div>
+            </div>
+            <div class="alert alert-danger my-3" *ngIf="vendorForm.get('image')?.hasError('required') && vendorForm.get('image')?.touched">
+              Debe ingresar una imagen para registrarse
+            </div>
+            <div class="alert alert-danger my-3" *ngIf="vendorForm.get('image')?.hasError('maxlength')">
+              El link de la imagen no puede tener mas de 200 caracteres
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <div class="mb-3 row">
+              <label for="address" class="col-lg-3 col-form-label">Direccion</label>
+              <div class="col-lg-9  ">
+                <input formControlName="address" type="text" class="form-control" placeholder="imagen">
+              </div>
+            </div>
+            <div class="alert alert-danger my-3" *ngIf="vendorForm.get('address')?.hasError('required') && vendorForm.get('address')?.touched">
+              Debe ingresar la direccion para registrarse
+            </div>
+            <div class="alert alert-danger my-3" *ngIf="vendorForm.get('address')?.hasError('maxlength')">
+              La direccion no puede contener mas de 100 caracteres
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <div class="mb-3 row">
+              <label for="zipcode" class="col-lg-3 col-form-label">Zipcode</label>
+              <div class="col-lg-9  ">
+                <input formControlName="zipcode" type="text" class="form-control" placeholder="imagen">
+              </div>
+            </div>
+            <div class="alert alert-danger my-3" *ngIf="vendorForm.get('zipcode')?.hasError('required') && vendorForm.get('zipcode')?.touched">
+              Debe ingresar una imagen para registrarse
+            </div>
+            <div class="alert alert-danger my-3" *ngIf="vendorForm.get('zipcode')?.hasError('maxlength')">
+              El codigo postal no puede contener mas de 100 caracteres
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <div class="mb-3 row">
+              <label for="bio" class="col-lg-3 col-form-label">Bio</label>
+              <div class="col-lg-9  ">
+                <input formControlName="bio"  type="text" class="form-control" placeholder="imagen">
+              </div>
+            </div>
+            <div class="alert alert-danger my-3" *ngIf="vendorForm.get('bio')?.hasError('required') && vendorForm.get('bio')?.touched">
+              Debe ingresar parte de su bibliografia
+            </div>
+            <div class="alert alert-danger my-3" *ngIf="vendorForm.get('bio')?.hasError('maxlength')">
+              La bibliografia no puede contener mas de 100 caracteres
+            </div>
+
+          </div>
+
+
+          <div class="form-group my-2">
+            <div class=" row">
+              <div class="col-2 text-start">
+                <label for="firstClass">Categoria de primer orden </label>
+              </div>
+              <div class="col-10">
+                <select class="form-select" formControlName="firstClass" (change)="onSelect($event)" >
+                  <option value="" disabled>Selecciona la categoria de primer orden de la empresa</option>
+                  <option *ngFor="let firstClass of firstClassCategoryArray"  value={{firstClass.key}}>{{firstClass.key}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-8">
+                <div class="alert alert-danger my-3"  *ngIf="vendorForm.get('firstClass')?.hasError('required') && vendorForm.get('firstClass')?.touched">
+                  Debes seleccionar la categoria de primer orden a la cual pertenece tu empresa
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div   class="form-group my-2">
+            <div class=" row">
+              <div class="col-2 text-start">
+                <label for="secondClass">Categoria de segundo orden </label>
+              </div>
+              <div class="col-10">
+                <select class="form-select" formControlName="secondClass">
+                  <option value="" disabled>Selecciona la categoria de primer orden de la empresa</option>
+                  <ng-container *ngIf="firstClassCategory === 'GOODS' " >
+                  <option *ngFor="let secondClass of secondClassCategoryGoodsArray" value={{secondClass.key}}>{{secondClass.key}}</option>
+                  </ng-container>
+                  <ng-container *ngIf="firstClassCategory === 'LOCALS' " >
+                    <option *ngFor="let secondClass of secondClassCategoryLocalsArray" value={{secondClass.key}}>{{secondClass.key}}</option>
+                    </ng-container>
+                    <ng-container *ngIf="firstClassCategory === 'HOTELS' " >
+                      <option *ngFor="let secondClass of secondClassCategoryHotelsArray" value={{secondClass.key}}>{{secondClass.key}}</option>
+                      </ng-container>
+                </select>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-8">
+                <div class="alert alert-danger my-3" *ngIf="vendorForm.get('secondClass')?.hasError('required') && vendorForm.get('secondClass')?.touched">
+                  Debes seleccionar la categoria de primer orden a la cual pertenece tu empresa
+                </div>
+              </div>
+            </div>
+          </div>
+
+
           <div class="col-12 text-center mt-3">
-            <button  type="submit" class="btn btn-primary col-8" [disabled]="!vendorForm.valid || vendorForm.get('confirmPassword')?.value !== vendorForm.get('password')?.value">Registrarse</button>
+            <button  type="submit" class="btn btn-primary col-8"  [disabled]="!vendorForm.valid || vendorForm.get('confirmPassword')?.value !== vendorForm.get('password')?.value">Registrarse</button>
           </div>
           <div class="col-12 text-center mt-2">
             <p>¿Ya tienes cuenta? <a href="/">Inicia sesión</a></p>
